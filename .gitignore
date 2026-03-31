@@ -207,3 +207,49 @@ marimo/_lsp/
 __marimo__/
 
 ./venv/
+
+# =========================
+# Models & Training Outputs
+# =========================
+Aaditya/models/
+Aaditya/results/
+Aaditya/tmp_trainer/
+
+# =========================
+# Large Dataset (ignore)
+# =========================
+Aaditya/Dataset/Dataset_medium/
+Aaditya/Dataset.zip
+
+# =========================
+# Keep small dataset (DO NOT IGNORE)
+# Aaditya/Dataset/Dataset_small/  ← intentionally kept
+
+# =========================
+# Python cache
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+
+# =========================
+# Hugging Face cache (local)
+# =========================
+.cache/
+*.safetensors
+
+# =========================
+# Notebook checkpoints
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+logs/
