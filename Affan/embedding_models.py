@@ -66,4 +66,4 @@ query_embeddings = E5.encode(queries)
 doc_embeddings = E5.encode(documents)
 
 similarity = E5.similarity(query_embeddings, doc_embeddings)
-print(similarity)
+print(similarity)   

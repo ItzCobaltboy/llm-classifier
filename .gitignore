@@ -253,3 +253,6 @@ Thumbs.db
 # Logs
 # =========================
 logs/
+.claude/
+Dataset/
+Dataset_cleaned/
