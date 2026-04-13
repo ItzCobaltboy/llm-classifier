@@ -1,0 +1,397 @@
+{
+  "best_val_acc": 0.5959,
+  "test_stats": {
+    "test_accuracy": 0.5936,
+    "per_class": {
+      "chatgpt": {
+        "precision": 0.6228,
+        "recall": 0.6883,
+        "f1-score": 0.6539,
+        "support": 818.0
+      },
+      "cohere": {
+        "precision": 0.4596,
+        "recall": 0.4315,
+        "f1-score": 0.4451,
+        "support": 818.0
+      },
+      "cohere-chat": {
+        "precision": 0.4554,
+        "recall": 0.3998,
+        "f1-score": 0.4258,
+        "support": 818.0
+      },
+      "gpt2": {
+        "precision": 0.5967,
+        "recall": 0.7164,
+        "f1-score": 0.6511,
+        "support": 818.0
+      },
+      "gpt3": {
+        "precision": 0.6041,
+        "recall": 0.7164,
+        "f1-score": 0.6555,
+        "support": 818.0
+      },
+      "gpt4": {
+        "precision": 0.7216,
+        "recall": 0.6687,
+        "f1-score": 0.6942,
+        "support": 818.0
+      },
+      "human": {
+        "precision": 0.5884,
+        "recall": 0.8093,
+        "f1-score": 0.6814,
+        "support": 818.0
+      },
+      "llama-chat": {
+        "precision": 0.6254,
+        "recall": 0.643,
+        "f1-score": 0.6341,
+        "support": 818.0
+      },
+      "mistral": {
+        "precision": 0.58,
+        "recall": 0.4963,
+        "f1-score": 0.5349,
+        "support": 818.0
+      },
+      "mistral-chat": {
+        "precision": 0.4898,
+        "recall": 0.4988,
+        "f1-score": 0.4942,
+        "support": 818.0
+      },
+      "mpt": {
+        "precision": 0.7525,
+        "recall": 0.5428,
+        "f1-score": 0.6307,
+        "support": 818.0
+      },
+      "mpt-chat": {
+        "precision": 0.6683,
+        "recall": 0.5122,
+        "f1-score": 0.5799,
+        "support": 818.0
+      }
+    },
+    "report_text": "              precision    recall  f1-score   support\n\n     chatgpt      0.623     0.688     0.654       818\n      cohere      0.460     0.432     0.445       818\n cohere-chat      0.455     0.400     0.426       818\n        gpt2      0.597     0.716     0.651       818\n        gpt3      0.604     0.716     0.655       818\n        gpt4      0.722     0.669     0.694       818\n       human      0.588     0.809     0.681       818\n  llama-chat      0.625     0.643     0.634       818\n     mistral      0.580     0.496     0.535       818\nmistral-chat      0.490     0.499     0.494       818\n         mpt      0.753     0.543     0.631       818\n    mpt-chat      0.668     0.512     0.580       818\n\n    accuracy                          0.594      9816\n   macro avg      0.597     0.594     0.590      9816\nweighted avg      0.597     0.594     0.590      9816\n"
+  },
+  "training_history": [
+    {
+      "epoch": 1,
+      "loss": 1.8818,
+      "train_acc": 0.301,
+      "val_acc": 0.3966
+    },
+    {
+      "epoch": 2,
+      "loss": 1.6212,
+      "train_acc": 0.3991,
+      "val_acc": 0.4497
+    },
+    {
+      "epoch": 3,
+      "loss": 1.5373,
+      "train_acc": 0.4314,
+      "val_acc": 0.464
+    },
+    {
+      "epoch": 4,
+      "loss": 1.4836,
+      "train_acc": 0.4516,
+      "val_acc": 0.4838
+    },
+    {
+      "epoch": 5,
+      "loss": 1.4424,
+      "train_acc": 0.4688,
+      "val_acc": 0.5118
+    },
+    {
+      "epoch": 6,
+      "loss": 1.4079,
+      "train_acc": 0.48,
+      "val_acc": 0.5167
+    },
+    {
+      "epoch": 7,
+      "loss": 1.3856,
+      "train_acc": 0.4945,
+      "val_acc": 0.5188
+    },
+    {
+      "epoch": 8,
+      "loss": 1.36,
+      "train_acc": 0.5013,
+      "val_acc": 0.5287
+    },
+    {
+      "epoch": 9,
+      "loss": 1.3453,
+      "train_acc": 0.5056,
+      "val_acc": 0.5365
+    },
+    {
+      "epoch": 10,
+      "loss": 1.3226,
+      "train_acc": 0.5166,
+      "val_acc": 0.5438
+    },
+    {
+      "epoch": 11,
+      "loss": 1.3087,
+      "train_acc": 0.5198,
+      "val_acc": 0.548
+    },
+    {
+      "epoch": 12,
+      "loss": 1.2914,
+      "train_acc": 0.5277,
+      "val_acc": 0.5486
+    },
+    {
+      "epoch": 13,
+      "loss": 1.2774,
+      "train_acc": 0.5337,
+      "val_acc": 0.5489
+    },
+    {
+      "epoch": 14,
+      "loss": 1.265,
+      "train_acc": 0.5373,
+      "val_acc": 0.5506
+    },
+    {
+      "epoch": 15,
+      "loss": 1.2561,
+      "train_acc": 0.5412,
+      "val_acc": 0.5532
+    },
+    {
+      "epoch": 16,
+      "loss": 1.2434,
+      "train_acc": 0.5458,
+      "val_acc": 0.5512
+    },
+    {
+      "epoch": 17,
+      "loss": 1.2372,
+      "train_acc": 0.5485,
+      "val_acc": 0.5645
+    },
+    {
+      "epoch": 18,
+      "loss": 1.2218,
+      "train_acc": 0.5521,
+      "val_acc": 0.5558
+    },
+    {
+      "epoch": 19,
+      "loss": 1.2138,
+      "train_acc": 0.5567,
+      "val_acc": 0.5623
+    },
+    {
+      "epoch": 20,
+      "loss": 1.2054,
+      "train_acc": 0.561,
+      "val_acc": 0.5617
+    },
+    {
+      "epoch": 21,
+      "loss": 1.1988,
+      "train_acc": 0.5626,
+      "val_acc": 0.569
+    },
+    {
+      "epoch": 22,
+      "loss": 1.1907,
+      "train_acc": 0.5665,
+      "val_acc": 0.5709
+    },
+    {
+      "epoch": 23,
+      "loss": 1.1874,
+      "train_acc": 0.5671,
+      "val_acc": 0.5757
+    },
+    {
+      "epoch": 24,
+      "loss": 1.1738,
+      "train_acc": 0.5712,
+      "val_acc": 0.5779
+    },
+    {
+      "epoch": 25,
+      "loss": 1.1715,
+      "train_acc": 0.5737,
+      "val_acc": 0.5644
+    },
+    {
+      "epoch": 26,
+      "loss": 1.1615,
+      "train_acc": 0.5768,
+      "val_acc": 0.5785
+    },
+    {
+      "epoch": 27,
+      "loss": 1.1592,
+      "train_acc": 0.5769,
+      "val_acc": 0.5703
+    },
+    {
+      "epoch": 28,
+      "loss": 1.1526,
+      "train_acc": 0.581,
+      "val_acc": 0.5831
+    },
+    {
+      "epoch": 29,
+      "loss": 1.1408,
+      "train_acc": 0.5846,
+      "val_acc": 0.5795
+    },
+    {
+      "epoch": 30,
+      "loss": 1.1417,
+      "train_acc": 0.5843,
+      "val_acc": 0.5804
+    },
+    {
+      "epoch": 31,
+      "loss": 1.1369,
+      "train_acc": 0.5866,
+      "val_acc": 0.5843
+    },
+    {
+      "epoch": 32,
+      "loss": 1.1269,
+      "train_acc": 0.5898,
+      "val_acc": 0.5835
+    },
+    {
+      "epoch": 33,
+      "loss": 1.1224,
+      "train_acc": 0.5913,
+      "val_acc": 0.5807
+    },
+    {
+      "epoch": 34,
+      "loss": 1.1153,
+      "train_acc": 0.5955,
+      "val_acc": 0.5804
+    },
+    {
+      "epoch": 35,
+      "loss": 1.1124,
+      "train_acc": 0.5957,
+      "val_acc": 0.5785
+    },
+    {
+      "epoch": 36,
+      "loss": 1.1064,
+      "train_acc": 0.5962,
+      "val_acc": 0.5781
+    },
+    {
+      "epoch": 37,
+      "loss": 1.1028,
+      "train_acc": 0.5982,
+      "val_acc": 0.5914
+    },
+    {
+      "epoch": 38,
+      "loss": 1.1005,
+      "train_acc": 0.5995,
+      "val_acc": 0.583
+    },
+    {
+      "epoch": 39,
+      "loss": 1.0962,
+      "train_acc": 0.6015,
+      "val_acc": 0.5916
+    },
+    {
+      "epoch": 40,
+      "loss": 1.0906,
+      "train_acc": 0.6047,
+      "val_acc": 0.5896
+    },
+    {
+      "epoch": 41,
+      "loss": 1.0916,
+      "train_acc": 0.6024,
+      "val_acc": 0.5922
+    },
+    {
+      "epoch": 42,
+      "loss": 1.0829,
+      "train_acc": 0.6058,
+      "val_acc": 0.5948
+    },
+    {
+      "epoch": 43,
+      "loss": 1.0738,
+      "train_acc": 0.6099,
+      "val_acc": 0.5883
+    },
+    {
+      "epoch": 44,
+      "loss": 1.074,
+      "train_acc": 0.609,
+      "val_acc": 0.5898
+    },
+    {
+      "epoch": 45,
+      "loss": 1.0733,
+      "train_acc": 0.6096,
+      "val_acc": 0.5908
+    },
+    {
+      "epoch": 46,
+      "loss": 1.0693,
+      "train_acc": 0.6096,
+      "val_acc": 0.5899
+    },
+    {
+      "epoch": 47,
+      "loss": 1.0659,
+      "train_acc": 0.6143,
+      "val_acc": 0.5889
+    },
+    {
+      "epoch": 48,
+      "loss": 1.0688,
+      "train_acc": 0.6126,
+      "val_acc": 0.594
+    },
+    {
+      "epoch": 49,
+      "loss": 1.0553,
+      "train_acc": 0.6143,
+      "val_acc": 0.5959
+    },
+    {
+      "epoch": 50,
+      "loss": 1.0554,
+      "train_acc": 0.6156,
+      "val_acc": 0.5936
+    }
+  ],
+  "label2id": {
+    "chatgpt": 0,
+    "cohere": 1,
+    "cohere-chat": 2,
+    "gpt2": 3,
+    "gpt3": 4,
+    "gpt4": 5,
+    "human": 6,
+    "llama-chat": 7,
+    "mistral": 8,
+    "mistral-chat": 9,
+    "mpt": 10,
+    "mpt-chat": 11
+  }
+}
