@@ -256,3 +256,8 @@ logs/
 .claude/
 Dataset/
 Dataset_cleaned/
+Dataset_cleaned.zip
+embeddings/
+embeddings.zip
+Claude/
+*.pt
