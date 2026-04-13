@@ -257,7 +257,8 @@ logs/
 Dataset/
 Dataset_cleaned/
 Dataset_cleaned.zip
-embeddings/
+embeddings/small
+embeddings/medium
 embeddings.zip
 Claude/
 *.pt
