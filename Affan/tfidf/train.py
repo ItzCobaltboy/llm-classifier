@@ -2,7 +2,6 @@ import os
 import json
 import time
 import pickle
-import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -178,9 +177,9 @@ def main():
 
     # ── Load data ──
     print("\n📂 Loading datasets...")
-    train_df = pd.read_parquet("D:\\VSCode\\llm-classifier\\Dataset\\Dataset_large\\train\\train.parquet")
-    val_df   = pd.read_parquet("D:\\VSCode\\llm-classifier\\Dataset\\Dataset_large\\val\\val.parquet")
-    test_df  = pd.read_parquet("D:\\VSCode\\llm-classifier\\Dataset\\Dataset_large\\test\\test.parquet")
+    train_df = pd.read_parquet(Path(PATH) / "train" / "train.parquet")
+    val_df   = pd.read_parquet(Path(PATH) / "val" / "val.parquet")
+    test_df  = pd.read_parquet(Path(PATH) / "test" / "test.parquet")
 
     print(f"Train size: {len(train_df)}")
     print(f"Val size:   {len(val_df)}")

@@ -11,8 +11,6 @@ print("Using model:", MODEL_NAME)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", device)
 
-MODEL_NAME = "distilbert-base-uncased"
-
 # Load dataset
 dataset = load_data()
 dataset, label2id, id2label = encode_labels(dataset)

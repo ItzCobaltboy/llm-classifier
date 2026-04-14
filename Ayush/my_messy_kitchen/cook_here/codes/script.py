@@ -22,11 +22,6 @@ def install_if_missing(packages):
             print(f"✅ Successfully installed {pip_name}.")
 
 required_packages = {
-    'os': 'os',
-    'warnings': 'warnings',
-    'random': 'random',
-    'collections': 'collections',
-    're': 're',
     'torch': 'torch',
     'accelerate': 'accelerate',
     'shap': 'shap',
@@ -35,7 +30,6 @@ required_packages = {
     'pandas': 'pandas',
     'matplotlib': 'matplotlib',
     'seaborn': 'seaborn',
-    'torch': 'torch',
     'transformers': 'transformers',
     'sklearn': 'scikit-learn',
     'textstat': 'textstat',

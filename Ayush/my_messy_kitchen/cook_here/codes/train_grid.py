@@ -1,24 +1,36 @@
 """
-train_distilbert.py — Grid-search training for DistilBERT.
+train_grid.py — Grid-search training for a configurable transformer model.
 
-Hyperparameter grid (36 runs):
+Replaces train_roberta.py, train_distilbert.py, and train_deberta.py.
+
+Hyperparameter grid (36 runs per model):
   max_len  : [256, 512, 128]
   lr       : [2e-5, 3e-5, 1e-5]
   batch    : [16, 32]
   lr_mode  : [uniform, differential]
 
 Multi-GPU: DataParallel is enabled automatically when >1 GPU is detected.
+
+Usage:
+    python train_grid.py --model roberta-base
+    python train_grid.py --model distilbert-base-uncased
+    python train_grid.py --model microsoft/deberta-v3-base
+
+Data path is read from the DATA_PATH environment variable (default: ./data).
 """
 
+import argparse
+import glob
+import os
+import subprocess
 import warnings
+
 warnings.filterwarnings("ignore")
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder
-from transformers import AutoTokenizer
-
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from transformers import AutoTokenizer, get_linear_schedule_with_warmup
 import torch
 
 from utils import (
@@ -30,24 +42,34 @@ from utils import (
     plot_training_curves, plot_confusion_matrix,
     predict_text, run_shap_explanation, save_artifacts,
 )
-from sklearn.preprocessing import StandardScaler
+
+# ── CLI ────────────────────────────────────────────────────────────────────────
+parser = argparse.ArgumentParser(description="Grid-search training for a transformer model.")
+parser.add_argument(
+    "--model",
+    default="roberta-base",
+    help="HuggingFace model ID (e.g. roberta-base, distilbert-base-uncased).",
+)
+args = parser.parse_args()
+
+MODEL_NAME = args.model
+MODEL_SLUG = MODEL_NAME.split("/")[-1]   # safe filename prefix
 
 # ── Config ─────────────────────────────────────────────────────────────────────
-MODEL_NAME = "distilbert-base-uncased"
-DATA_PATH  = "/kaggle/input/datasets/ayusheinsteinyadav/project"
-EPOCHS     = 8
-DROPOUT    = 0.3
+DATA_PATH   = os.getenv("DATA_PATH", "./data")
+EPOCHS      = 8
+DROPOUT     = 0.3
 
-MAX_LENS   = [256, 512, 128]
-LRS        = [2e-5, 3e-5, 1e-5]
+MAX_LENS    = [256, 512, 128]
+LRS         = [2e-5, 3e-5, 1e-5]
 BATCH_SIZES = [16, 32]
-LR_MODES   = [False, True]   # False = uniform LR,  True = differential LR
+LR_MODES    = [False, True]   # False = uniform LR,  True = differential LR
 
 # ── Setup ──────────────────────────────────────────────────────────────────────
 set_seed(SEED)
 DEVICE = get_device()
+print(f"Model  : {MODEL_NAME}")
 print(f"Device : {DEVICE}  |  GPUs available: {torch.cuda.device_count()}")
-
 
 # ── Load & prepare data (once, outside the grid loop) ─────────────────────────
 print("\n" + "="*60)
@@ -70,8 +92,8 @@ print(f"  Class distribution:\n{df[LABEL_COL].value_counts().to_string()}")
 
 # ── Encode labels ──────────────────────────────────────────────────────────────
 le = LabelEncoder()
-df["label"]  = le.fit_transform(df[LABEL_COL])
-NUM_CLASSES  = len(le.classes_)
+df["label"] = le.fit_transform(df[LABEL_COL])
+NUM_CLASSES = len(le.classes_)
 print(f"\n  Classes ({NUM_CLASSES}): {list(le.classes_)}")
 
 # ── Restore splits ─────────────────────────────────────────────────────────────
@@ -95,7 +117,7 @@ val_stylo   = scaler.transform(val_stylo_raw).astype(np.float32)
 test_stylo  = scaler.transform(test_stylo_raw).astype(np.float32)
 print(f"  Stylometric matrix shape: {train_stylo.shape}")
 
-# ── Tokenizer (loaded once — tokenization is model-specific) ───────────────────
+# ── Tokenizer ──────────────────────────────────────────────────────────────────
 print(f"\n  Loading tokenizer: {MODEL_NAME}")
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 print(f"  Vocabulary size: {tokenizer.vocab_size:,}")
@@ -112,7 +134,7 @@ for max_len in MAX_LENS:
             for use_differential_lr in LR_MODES:
 
                 lr_tag   = "diff_lr" if use_differential_lr else "uniform_lr"
-                run_name = f"distilbert__maxlen{max_len}__lr{lr}__bs{batch_size}__{lr_tag}"
+                run_name = f"{MODEL_SLUG}__maxlen{max_len}__lr{lr}__bs{batch_size}__{lr_tag}"
                 checkpoint_path = f"model_{run_name}.pt"
 
                 print("\n" + "="*60)
@@ -137,11 +159,10 @@ for max_len in MAX_LENS:
 
                 total_steps  = len(train_loader) * EPOCHS
                 warmup_steps = int(0.1 * total_steps)
-                from transformers import get_linear_schedule_with_warmup
                 scheduler = get_linear_schedule_with_warmup(
                     optimizer,
-                    num_warmup_steps  = warmup_steps,
-                    num_training_steps= total_steps,
+                    num_warmup_steps   = warmup_steps,
+                    num_training_steps = total_steps,
                 )
                 print(f"  Training steps: {total_steps}  |  Warmup: {warmup_steps}")
 
@@ -184,7 +205,8 @@ for max_len in MAX_LENS:
                 run_index += 1
 
 # ── Zip all outputs ────────────────────────────────────────────────────────────
-import subprocess
-subprocess.run(["zip", "-j", "distilbert_outputs.zip"] +
-               [f for f in __import__('glob').glob("/kaggle/working/*distilbert*")])
-print("\nAll DistilBERT runs complete. Outputs zipped → distilbert_outputs.zip")
+zip_name = f"{MODEL_SLUG}_outputs.zip"
+output_files = glob.glob(f"*{MODEL_SLUG}*")
+if output_files:
+    subprocess.run(["zip", "-j", zip_name] + output_files)
+    print(f"\nAll runs complete. Outputs zipped → {zip_name}")
